@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Совпадение по постам{% endblock %}
+{% block header %}Результаты поиска{% endblock %}
+{% block content %}
+
+  <div class="eskimo-two-columns" data-columns>
+    {% for post in page %}
+      {% include "includes/post_item.html" with post=post %}
+    {% endfor %}
+    - {{ value }}
+  </div>
+
+{% include "includes/most_commented.html" %}
+
+{% include "includes/paginator.html" %}
+
+
+
+{% endblock %}

@@ -1,0 +1,64 @@
+<!-- COMMENTS -->
+{% load static %}
+{% load user_filters %}
+<div id="eskimo-comments-wrapper">
+    <div id="eskimo_comments_block" class="eskimo_comments_block">
+        <h3 class="eskimo-title-with-border">
+            <span>Comments</span>
+        </h3>
+        {% if user.is_authenticated %}
+        <div id="eskimo_comment_form" class="eskimo_comment_form">
+            {% if comment %}
+            <h3>Измените комментарий</h3>
+            <form action="{% url 'posts:edit_comment' post.author.username post.id comment.id %}" method="post" id="commentform">
+            {% else %}
+            <h3>Оставьте отзыв</h3>
+            <form action="{% url 'posts:add_comment' post.author.username post.id %}" method="post" id="commentform">
+            {% endif %}
+                {% csrf_token %}
+                {{ form.text|addclass:'form-control' }}
+                <br>
+                <p class="form-text text-white">{{ form.text.help_text }}</p>
+                <input name="submit" type="submit" id="submit" class="btn btn-default" value="Отправить" />
+                {% if comment %}
+                    <button type="button" class="btn btn-info bg-danger" href="#" onclick="history.back();">Ничего не менять</button>
+                {% endif %}
+            </form>
+        </div>
+        {% endif %}
+        <div class="eskimo_commentlist">
+            <!-- COMMENT  -->
+            {% for item in comments %}
+            <div class="eskimo_comment_wrapper">
+                <div class="eskimo_comments">
+                    <div class="eskimo_comment">
+                        <div class="eskimo_comment_inner">
+                            <div class="eskimo_comment_left">
+                                <img alt='' src={{ item.author.avatar.url }} />
+                            </div>
+                            <div class="eskimo_comment_right">
+                                <div class="eskimo_comment_right_inner ">
+                                    <cite class="eskimo_fn">
+                                        <a href="{% url 'posts:profile' item.author.username %}"><span style="color:rgb(12, 247, 32)">{{ item.author.username }}</span></a>
+                                    </cite>
+                                    <div class="eskimo_comment_links text-white">
+                                        <i class="fa fa-clock-o"></i> {{ item.created }}
+                                    </div>
+                                    <div>
+                                        {{ item.text|linebreaksbr|truncatewords:500 }}
+                                    </div>
+                                    {% if user == item.author and not comment %}
+                                        <a href="{% url 'posts:edit_comment' post.author.username post.id item.id%}"><span class="badge badge-default"><span style="color:rgb(209, 255, 2)">Редактировать</span></span></a>
+                                        <a href="{% url 'posts:delete_comment' post.author.username post.id item.id %}"><span class="badge badge-default"><span style="color:rgb(255, 2, 2)">Удалить</span></span></a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %} 
+        </div>
+    </div>
+</div>
+

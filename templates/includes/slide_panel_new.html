@@ -1,0 +1,43 @@
+{% load static %}
+<div id="eskimo-overlay"></div>
+<!-- SLIDE PANEL -->
+<div id="eskimo-panels">
+    <aside id="eskimo-panel" class="eskimo-panel">
+        <div class="eskimo-panel-inner">
+            <!-- CLOSE SLIDE PANEL BUTTON -->
+            <a href="#" class="eskimo-panel-close"><i class="fa fa-times"></i></a>
+            <!-- BOX -->
+            <div class="eskimo-author-box eskimo-widget">
+                <div class="eskimo-author-img">
+                    <img src='{% static "images/slide_panel_foto.jpg" %}' />
+                </div>
+                <h3><span>Twitter Killer</span></h3>
+                <p class="eskimo-author-subtitle">Соц сеть &amp; мой первый проект</p>
+                <p class="eskimo-author-description">Если вы посетили данный сайт, то вы либо учащийся Яндекс.Практикума, либо хотите предложить мне работу ^_^</p>
+                <div class="eskimo-author-box-btn">
+                    {% if user.is_authenticated %}
+                    <a class="btn btn-default" href="{% url 'password_change' %}">Изменить пароль</a>
+                    <br>
+                    <a class="btn btn-default" href="{% url 'logout'  %}">Выйти</a>
+                    {% else %}
+                    <a class="btn btn-default" href="{% url 'login' %}">Войти в аккаунт</a>
+                    <br>
+                    <a class="btn btn-default" href="{% url 'users:signup' %}">Зарегистрироваться</a>
+                    {% endif %}
+                </div>
+            </div>
+           
+            <div class="eskimo-categories eskimo-widget">
+                <h5 class="eskimo-title-with-border"><span>Группы</span></h5>
+                {% for group in groups %}
+                <ul>
+                    <li>
+                        <a href="{% url 'posts:group_posts' group.slug %}">{{ group.title }}</a> <span class="badge badge-pill badge-default">{{ group.posts.count }}</span>
+                    </li>
+                    
+                </ul>
+                {% endfor %}
+            </div>
+        </div>
+    </aside>
+</div>

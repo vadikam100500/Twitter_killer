@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <title>{% block title %}The Last Social Media You'll Ever Need{% endblock %} | Twitter killer</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name='description' content='twitter killer&nbsp; - joke, its my first site'>
+    <!-- <meta name="keywords" content=""> -->
+    {% load static %}
+    <link rel="shortcut icon" href="{% static 'images/avtor.jpg' %}" type="image/jpg">
+    <link href='{% static "css/bootstrap.min.css" %}' rel="stylesheet" type="text/css">
+    <link href='{% static "css/fontawesome.css" %}' rel="stylesheet" type="text/css">
+    <link href='{% static "css/slick.css" %}' rel="stylesheet" type="text/css">
+    <link href='{% static "css/style.css" %}' rel="stylesheet" type="text/css">
+    <style>#eskimo-main-container{background-image:  url('{% static "images/bg3.jpg" %}')}</style>
+</head>
+
+<body>
+    <!-- READING POSITION INDICATOR -->
+    <progress value="0" id="eskimo-progress-bar">
+        <span class="eskimo-progress-container">
+            <span class="eskimo-progress-bar"></span>
+        </span>
+    </progress>
+    <!-- SITE WRAPPER -->
+    <div id="eskimo-site-wrapper">
+        <!-- MAIN CONTAINER -->
+        <main id="eskimo-main-container">
+            <div class="container">
+                <!-- SIDEBAR -->
+                {% include 'includes/sidebar_new.html' %}
+                <!-- TOP ICONS -->
+                <ul class="eskimo-top-icons">
+                    <li id="eskimo-panel-icon">
+                        <a href="#eskimo-panel" class="eskimo-panel-open"><i class="fa fa-bars"></i></a>
+                    </li>
+                    <li id="eskimo-search-icon">
+                        <a id="eskimo-open-search" href="#"><i class="fa fa-search"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+                <!-- SLIDER WITH ONE POST -->
+                <div class="eskimo-carousel-container eskimo-bg-loader">
+                    <div id="eskimo-post-slider" class="eskimo-slider">
+                        <!-- SLIDE -->
+                        <div>
+                            <ul class="eskimo-slider-image-meta eskimo-image-meta-post">
+                                <li>
+                                    <a href="https://github.com/vadikam100500"><span class="badge badge-default">vadikam prod ^_^</span></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                            {% load static %}
+                            <img style="width:1400px; height:600px "  src='{% static "images/avtor.jpg" %}' />
+                            <div class="eskimo-slider-desc">
+                                <div class="eskimo-slider-desc-inner">
+                                    <h2 class="card-title">{% block header %}The Last Social Media You'll Ever Need{% endblock %}</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- BLOG POSTS -->
+                <div class="eskimo-masonry-grid">
+                    {% block content %}
+                    <!-- CONTENT -->
+                    {% endblock %}
+                </div>
+            </div>
+        </main>
+        <!-- FOOTER -->
+        {% include 'includes/footer.html' %}
+    </div>
+    <!-- GO TO TOP BUTTON -->
+    <a id="eskimo-gototop" href="#"><i class="fa fa-chevron-up"></i></a>
+    <!-- SLIDE PANEL OVERLAY -->
+    {% include 'includes/slide_panel_new.html' %}
+    <!-- FULLSCREEN SEARCH -->
+    {% include 'includes/search.html' %}
+    <!-- JS FILES -->
+        <script src='{% static "js/jquery-3.3.1.min.js" %}'></script>
+        <script src='{% static "js/bootstrap.min.js" %}'></script>
+        <script src='{% static "js/salvattore.min.js" %}'></script>
+        <script src='{% static "js/slick.min.js" %}'></script>
+        <script src='{% static "js/panel.js" %}'></script>
+        <script src='{% static "js/reading-position-indicator.js" %}'></script>
+        <script src='{% static "js/custom.js" %}'></script>
+    <!-- POST SLIDER -->
+    <script>
+        (function($) {
+            "use strict";
+            $(document).ready(function() {
+                $('#eskimo-post-slider').slick({
+                    autoplay: true,
+                    autoplaySpeed: 5000,
+                    slidesToScroll: 1,
+                    adaptiveHeight: true,
+                    slidesToShow: 1,
+                    arrows: true,
+                    dots: false,
+                    fade: true
+                });
+            });
+            $(window).on('load', function() {
+                $('#eskimo-post-slider').css('opacity', '1');
+                $('#eskimo-post-slider').parent().removeClass('eskimo-bg-loader');
+            });
+        })(jQuery);
+
+    </script>
+    <!-- POST CAROUSEL -->
+    <script>
+        (function($) {
+            "use strict";
+            $(document).ready(function() {
+                $('#eskimo-post-carousel').slick({
+                    infinite: false,
+                    slidesToScroll: 1,
+                    arrows: true,
+                    dots: false,
+                    slidesToShow: 3,
+                    responsive: [{
+                        breakpoint: 992,
+                        settings: {
+                            slidesToShow: 2
+                        }
+                    }, {
+                        breakpoint: 576,
+                        settings: {
+                            slidesToShow: 1
+                        }
+                    }]
+
+                });
+                $('#eskimo-post-carousel').css('opacity', '1');
+            });
+        })(jQuery);
+
+    </script>
+</body>
+
+</html>

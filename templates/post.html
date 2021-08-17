@@ -1,0 +1,25 @@
+{% extends "profile.html" %}
+{% block sub_content %}
+
+  <div class="eskimo-featured-img">  
+    {% load thumbnail %}
+    {% thumbnail post.image "960x500" upscale=True as im %}
+      <img src="{{ im.url }}"/>
+      <!-- <img style="width:980px; height:600px " src="{{ im.url }}"/> -->
+    {% endthumbnail %}
+    <a href="{% url 'posts:profile' post.author.username %}"><span class="badge badge-default">Автор поста: <span style="color:rgb(12, 247, 32)">{{ post.author.username }}</span></span></a>
+    {% if user == post.author %}
+      <a href="{% url 'posts:post_edit' user.username post.id %}"><span class="badge badge-default"><span style="color:rgb(209, 255, 2)">Редактировать</span></span></a>
+      <a href="{% url 'posts:post_delete' post.author.username post.id %}"><span class="badge badge-default"><span style="color:rgb(255, 2, 2)">Удалить</span></span></a>
+    {% endif %}
+  </div>
+  <blockquote style="width: 1200px; word-wrap:break-word;">
+    <h1><strong>{{ post.discription }}</strong></h1>
+  </blockquote>
+  <blockquote style="width: 1200px; word-wrap:break-word;">
+      {{ post.text}}
+    <p class="text-white">{{ post.pub_date|date:"d M Y" }}</p>
+  </blockquote>
+
+{% include "includes/comments.html" %}
+{% endblock %}

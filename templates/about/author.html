@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}Об авторе проекта{% endblock %}
+{% block header %}Об авторе проекта{% endblock %}
+{% block content %}
+
+<!-- PAGE TITLE -->
+  <div class="eskimo-page-title">
+    <h1><span>Камендов Вадим Леонидович</span></h1>
+    <p class="eskimo-page-subtitle">vadikam100500</p>
+  </div>
+<!-- ABOUT ME -->
+  <div class="row">
+    <div class="col-12 col-lg-8 order-2 order-lg-1">
+      <p>
+        <span class="lead text-white"><em>
+            Очень не люблю рассказывать о себе =P.<br>       
+            Когда будет время напишу: что меня вдохновляет, 
+            как я пришел в мир программирования и как я себя ощущаю в этом мире.
+        </em></span>
+      </p>
+    </div>
+    <br>
+    <div class="col-12 col-lg-4 order-1 order-lg-2 mb-5 mb-lg-0">
+    {% load static %}
+      <img src='{% static "images/avtor.jpg" %}' class="img-fluid mx-auto d-block eskimo-img-shadow" />
+    </div>
+    <br>
+    <!-- ACCORDION -->
+    <div id="mp-accordion-1" data-children=".mp-accordion-item" class="mp-accordion">
+        <!-- ACCORDION ITEM 1 -->
+        <div class="mp-accordion-item">
+            <a class="mp-accordion-title" data-toggle="collapse" data-parent="#mp-accordion-1" href="#mp-accordion-item-1" aria-expanded="false" aria-controls="mp-accordion-item-1"> Во время работы, тратить бюджет мне помогал он:</a>
+            <div id="mp-accordion-item-1" class="collapse show" role="tabpanel">
+                <div class="mp-accordion-content">
+                    <h5>На первых трех месяцах обучения, котей ел больше меня xP</h5>
+                    <img src={% static "images/kote.jpg" %} width="250" height="200">
+                </div>
+            </div>
+        </div>
+        <!-- ACCORDION ITEM 2 -->
+        <div class="mp-accordion-item">
+            <a class="mp-accordion-title collapsed" data-toggle="collapse" data-parent="#mp-accordion-1" href="#mp-accordion-item-2" aria-expanded="false" aria-controls="mp-accordion-item-2">А вот это рабочее место</a>
+            <div id="mp-accordion-item-2" class="collapse" role="tabpanel">
+                <div class="mp-accordion-content">
+                    <h5>Но не мое... Я работаю на балконе, а там смотреть не на что =P</h5>
+                    <img src={% static "images/mesto.jpg" %} width="250" height="200">
+                </div>
+            </div>
+        </div>
+        <!-- ACCORDION ITEM 3 -->
+        <div class="mp-accordion-item">
+            <a class="mp-accordion-title collapsed" data-toggle="collapse" data-parent="#mp-accordion-1" href="#mp-accordion-item-3" aria-expanded="false" aria-controls="mp-accordion-item-3">Пара ссылок на меня</a>
+            <div id="mp-accordion-item-3" class="collapse" role="tabpanel">
+                <div class="mp-accordion-content">
+                    Устал возиться с фронтом, поэтому вот:<br>
+                    <a href="https://github.com/vadikam100500">Github</a><br>
+                    <a href="https://www.instagram.com/vadim.kame___">Instagram</a><br>
+                    <a href="https://t.me/vadikam100500">Telegram</a>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+
+{% endblock %}

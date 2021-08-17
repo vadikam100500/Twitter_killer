@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Последние обновления на сайте{% endblock %}
+{% block header %}Последние обновления на сайте{% endblock %}
+{% block content %}
+
+{% load cache %}
+{% cache 20 index_page using key page %}
+
+  <div class="eskimo-two-columns" data-columns>
+    {% for post in page %}
+      {% include "includes/post_item.html" with post=post %}
+    {% endfor %}
+  </div>
+
+{% include "includes/paginator.html" %}
+{% include "includes/most_commented.html" %}
+{% endcache %}
+
+
+{% endblock %}

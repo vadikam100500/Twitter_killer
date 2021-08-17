@@ -1,0 +1,74 @@
+
+  <!-- DIVIDER -->
+  <hr />
+  <!-- TABS -->
+  <h2>АКТИВНОСТЬ</h2>
+  <!-- TABS NAVIGATION -->
+  <ul class="nav nav-tabs">
+    <!-- TAB 1 -->
+    <li class="nav-item">
+      <a class="nav-link active" data-toggle="tab" href="#mp-tab-fashion" aria-expanded="true">КОЛ-ВО ПУБЛИКАЦИЙ</a>
+    </li>
+    <!-- TAB 2 -->
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#mp-tab-wildlife" aria-expanded="false">ПОДПИСКИ</a>
+    </li>
+    <!-- TAB 3 -->
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#mp-tab-real-estate" aria-expanded="false">ПОДПИСЧИКИ</a>
+    </li>
+  </ul>
+  <!-- TABS CONTENT -->
+  <div class="eskimo-tabs-content tab-content">
+    <!-- TAB 1 -->
+    <div class="tab-pane fade active show" id="mp-tab-fashion" role="button" aria-expanded="true">
+      <p>Кол-во постов, которые опубликовал автор, за последнее время:
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" style="width: {{ author.posts.count }}%" role="progressbar" aria-valuenow="{{ author.posts.count }}" aria-valuemin="0" aria-valuemax="1000">{{ author.posts.count }}</div>
+        </div>
+        <br>
+      <p>
+        {% if user.is_authenticated and author != user %}
+          {% if following %}
+            Также вы можете отписаться от автора<br>
+            <div class="eskimo-author-box-btn">
+              <a class="btn btn-default" href="{% url 'posts:profile_unfollow' author.username %}">Отписаться</a>
+            </div>
+          {% else %}
+            Также вы можете подписаться на автора<br>
+            <div class="eskimo-author-box-btn">
+              <a class="btn btn-default" href="{% url 'posts:profile_follow' author.username %}">Подписаться</a>
+            </div>
+          {% endif %}
+        {% endif %}
+      </p>
+    </div>
+    <!-- TAB 2 -->
+    <div class="tab-pane fade " id="mp-tab-wildlife" role="button" aria-expanded="false">
+      <p>
+        Количество активных подпиcчиков: 
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped bg-info progress-bar-animated" style="width: {{ author.follower.count }}%" role="progressbar" aria-valuenow="{{ author.follower.count }}" aria-valuemin="0" aria-valuemax="1000">{{ author.follower.count }}</div>
+        </div>
+        <br>        
+        А здесь будет список юзеров, на которых подписан владелец профиля:
+        <ul>Ссылка не первого юзера</ul>
+        <ul>Ссылка не второго юзера</ul>
+        <ul>и т.д.</ul>
+      </p>
+    </div>
+    <!-- TAB 3 -->
+    <div class="tab-pane fade " id="mp-tab-real-estate" role="button" aria-expanded="false">
+      <p>
+        Количество активных подписок: 
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped bg-warning progress-bar-animated" style="width: {{ author.following.count }}%" role="progressbar" aria-valuenow="{{ author.following.count }}" aria-valuemin="0" aria-valuemax="1000">{{ author.following.count }}</div>
+        </div>
+        <br>
+        А здесь будет список юзеров, которые подписаны на владельца профиля:
+        <ul>Ссылка не первого юзера</ul>
+        <ul>Ссылка не второго юзера</ul>
+        <ul>и т.д.</ul>
+      </p>
+    </div>
+  </div>

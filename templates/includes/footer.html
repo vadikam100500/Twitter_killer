@@ -1,0 +1,24 @@
+
+  <footer id="eskimo-footer">
+    <div class="container">
+      <div class="row eskimo-footer-wrapper">
+        <!-- FOOTER WIDGET 1 -->
+        <div class="col-12 col-lg-6 mb-4 mb-lg-0">
+          <h5 class="eskimo-title-with-border"><span>Об авторе проекта</span></h5>
+          <p>Если брать фразу: "Первый блин - комом", то это очень прикольный ком, во всяком случае для меня</p>
+          <p><a href="{% url 'about:author' %}" class="btn btn-default">Узнать больше</a></p>
+        </div>
+        <!-- FOOTER WIDGET 2 -->
+        <div class="col-12 col-lg-6">
+          <h5 class="eskimo-title-with-border"><span>Технологии</span></h5>
+          <p>Краткий список использованных технологий, ничего нового, только ради тз</p>
+          <p><a href="{% url 'about:tech' %}" class="btn btn-default">Узнать больше</a></p>
+        </div>
+      </div>
+    <!-- CREDITS -->
+      <div class="eskimo-footer-credits">
+        <p>
+          Социальная сеть <a href="{% url 'posts:index' %}" target="_blank">Twitter killer</a>© {{ year }}, все права не защищены.        </p>
+      </div>
+    </div>
+  </footer>

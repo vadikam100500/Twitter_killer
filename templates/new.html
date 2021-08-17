@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block header %}
+  {% if post %}
+    Редактировать пост
+  {% else %}
+    Новый пост
+  {% endif %}
+{% endblock %}
+{% block content %}
+
+<div class="row justify-content-center">
+  {% for error in form.errors.values %}
+    <div class="alert alert-danger" role="alert">
+      {{ error|escape }}
+    </div>
+  {% endfor %}
+  <form method="post" {% if post %} action="{% url 'posts:post_edit' post.author.username post.id%}" {% else %} action="{% url 'posts:new_post' %}" {% endif %} enctype="multipart/form-data">
+    {% csrf_token %}
+    {% for field in form %}
+      <div aria-required={% if field.field.required %}"true"{% else %}"false"{% endif %}>
+        <label for="{{ field.id_for_label }}">{{ field.label }}{% if field.field.required %}<span class="required">*</span>{% endif %}</label>
+        <div class="col-md-6">
+          {{ field }}
+
+          {% if field.help_text %}
+          <p>
+            <small id="{{ field.id_for_label }}-help" class="form-text">{{ field.help_text|safe }}</small>
+          </p>
+          {% endif %}
+        </div>                
+      </div>
+    {% endfor %}
+    <div class="col-md-6 offset-md-4">
+      <div class="btn-group">
+        <button type="submit" class="btn btn-primary bg-primary">
+          {% if post %}
+            Сохранить
+          {% else %}
+            Добавить 
+          {% endif %}
+        </button>
+          {% if post %}
+            &nbsp
+            <button type="button" class="btn btn-info bg-danger" href="#" onclick="history.back();">Ничего не менять</button>
+          {% endif %}
+      </div>
+    </div>
+  </form>
+</div>
+
+{% endblock %}

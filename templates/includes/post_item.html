@@ -1,0 +1,51 @@
+
+<div class="card-masonry">
+    <div class="card">
+        {% load thumbnail %}
+        {% thumbnail post.image "900x360" upscale=True as im %}
+            <a href="{% url 'posts:post' post.author.username post.id %}">
+                <img class="card-vertical-img" src="{{ im.url }}" />   
+            </a>
+        {% endthumbnail %}
+        {% if not post.image %}
+        {% load static %}
+            <a href="{% url 'posts:post' post.author.username post.id %}">
+                <img class="card-vertical-img" src='{% static "images/slide_panel_foto.jpg" %}' />   
+            </a>
+        {% endif %}
+        <div class="card-border">
+            <div class="card-body">
+                {% if post.group %}
+                    <div class="card-category">
+                        <span><a href="{% url 'posts:group_posts' post.group.slug %}">#{{ post.group.title }}</a></span>
+                    </div>
+                {% endif %}
+                <h3 class="card-title"><a href="{% url 'posts:post' post.author.username post.id %}">{{ post.discription }}</a></h3>
+                <p>{{ post.text|linebreaksbr|truncatechars:150 }}</p>
+                {% if post.text|length >= 150 %}
+                    <a class="text-primary" href="{% url 'posts:post' post.author.username post.id %}">Смотреть весь</a>
+                {% endif %}
+            </div>
+            <div class="card-footer">
+                <div class="eskimo-author-meta">
+                    By <a class="author-meta" href="{% url 'posts:profile' post.author.username %}">@{{ post.author }}</a>
+                </div>
+                <div class="eskimo-date-meta">{{ post.pub_date|date:"d M Y" }}</div>
+                {% if post.comments.exists %}
+                    <div class="eskimo-reading-meta">
+                        <a class="reading-meta" href="{% url 'posts:post' post.author.username post.id  %}">Комментариев: {{ post.comments.count }}</a>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="card-footer">
+                <a class="text-primary" href="{% url 'posts:post' post.author.username post.id %}">Добавить комментарий</a>
+                {% if user == post.author %}
+                    /
+                    <a class="text-success" href="{% url 'posts:post_edit' post.author.username post.id %}">Редактировать пост</a>
+                    /
+                    <a class="text-danger" href="{% url 'posts:post_delete' post.author.username post.id %}">Удалить</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
