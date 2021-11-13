@@ -45,8 +45,12 @@ class PaginatorViewsTest(TestCase):
     def test_first_page_contains_ten_records(self):
         urls = {
             reverse('posts:index'): 'main page',
-            reverse('posts:group_posts', kwargs={'slug': 'test-slug'}): 'group page',
-            reverse('posts:profile', kwargs={'username': 'test_user'}): 'profile'
+            reverse(
+                'posts:group_posts', kwargs={'slug': 'test-slug'}
+            ): 'group page',
+            reverse(
+                'posts:profile', kwargs={'username': 'test_user'}
+            ): 'profile'
         }
         for url in urls.keys():
             response = self.client.get(url)
@@ -119,7 +123,9 @@ class PostsViewsTests(TestCase):
         templates_page_names = {
             reverse('posts:index'): 'index.html',
             reverse('posts:new_post'): 'new.html',
-            reverse('posts:group_posts', kwargs={'slug': 'test-slug'}): 'group.html',
+            reverse(
+                'posts:group_posts', kwargs={'slug': 'test-slug'}
+            ): 'group.html',
         }
         for reverse_name, template in templates_page_names.items():
             with self.subTest(template=template):

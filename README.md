@@ -1,35 +1,30 @@
 # **Twitter killer**
-*** 
-### **Social network of bloggers**
+- **Social network of bloggers**
 ***
 #### *A social network that allows you to create an account, publish posts, subscribe to your favorite authors and tag your favorite posts.*
 ***
-##### Technologies
-- django
-- django-debug-toolbar
-- django_extensions
-- sorl-thumbnail
+## Stack
 
-
-##### Running a project in dev-mode
+- Python 3
+- Django 2.2
+- sqlite3
+- Bootstrap
+- JavaScript
+- CSS
+***
+## Local deploy
 - Install and activate the virtual environment
 - Install dependencies from requirements.txt
    ```
-   pip install -r requirements.txt
+   $ pip install -r requirements.txt
    ``` 
 - In the folder with manage.py, run the command:
    ```
-   python3 manage.py runserver
+   $ python3 manage.py runserver
    ```
-   
-#### **Author**
+- If you want to use debug-toolbar, uncomment correct lines in congfig and TwiKi urls, before runserver
 ***
-
-https://github.com/vadikam100500
-
-
-##### Technical requirement:
-***
+## Task:
 
 Необходимо разработать социальную сеть для публикации личных дневников.
 Это будет сайт, на котором можно создать свою страницу. 
